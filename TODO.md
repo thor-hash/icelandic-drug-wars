@@ -1,4 +1,4 @@
-# Krónan Brennur — TODO
+# Verðbólgudraumurinn — TODO
 
 ## v1.0 (Lokið)
 - [x] Core gameplay loop: 30 dagar, buy/sell/travel
@@ -19,12 +19,12 @@
 - [x] Svartamarkaður UI
 
 ## v3.0 (Lokið)
-- [x] Nýtt heiti: "Krónan Brennur — Drug Wars: Ísland"
+- [x] Nýtt heiti: "Verðbólgudraumurinn — Drug Wars: Ísland"
 - [x] Íslensk dópnöfn: Kók, MDMA, Sýra, Amf, Gras, Sveppir
 - [x] Emoji við hvert efni (❄️💜🌈⚡🌿🍄)
 - [x] Hærra verðbil (8K-30K fyrir Kók osfrv.)
 - [x] Hærri byrjunargildi (250K cash, 650K skuld)
-- [x] Bjarni Bróðir sem lánshákarl (með persónuleika)
+- [x] Jón Bróðir sem lánshákarl (með persónuleika)
 - [x] Allur texti á íslensku (UI labels, events, skilaboð)
 - [x] Íslenskir events: Eldgos, Snjóstormur, Ferju-seinkun
 - [x] Krónan fellur event (allt +20%)

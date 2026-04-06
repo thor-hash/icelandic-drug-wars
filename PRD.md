@@ -1,8 +1,8 @@
-# Product Requirements Document (PRD): Krónan Brennur
+# Product Requirements Document (PRD): Verðbólgudraumurinn
 
 **Version:** 3.5
 **Date:** 6. apríl 2026
-**Product Name:** Krónan Brennur (Drug Wars: Ísland)
+**Product Name:** Verðbólgudraumurinn (Drug Wars: Ísland)
 **Undirtitill:** "30 dagar til að borga lánshákarlinn áður en eldgosið eyðileggur allt"
 
 ---
@@ -11,10 +11,10 @@
 
 Íslensk útgáfa af klassíska Drug Wars (1984). Single HTML file, retro terminal-stíll. Allur texti á íslensku. Þurr kaldhæðni frekar en dramatík.
 
-Þú ert eiturlyfjasali með 30 daga til að borga Bjarna Bróður skuldina þína. Kauptu lágt, seldu hátt, ferðastu á milli bæja. Skuldin hækkar á hverjum degi. Lögreglan fylgist með.
+Þú ert eiturlyfjasali með 30 daga til að borga Jóns Bróður skuldina þína. Kauptu lágt, seldu hátt, ferðastu á milli bæja. Skuldin hækkar á hverjum degi. Lögreglan fylgist með.
 
 **Sigurskilyrði:** `score = cash + banki + inventoryValue - skuld`
-Jákvætt score = sigur. Neikvætt = Bjarni sendir menn.
+Jákvætt score = sigur. Neikvætt = Jón sendir menn.
 
 ### Core Loop (per turn)
 
@@ -36,7 +36,7 @@ Jákvætt score = sigur. Neikvætt = Bjarni sendir menn.
   day: 1,              // 1–30
   location: 'reykjavik',
   cash: 250000,        // á þér
-  debt: 650000,        // skuld við Bjarna
+  debt: 650000,        // skuld við Jóns
   bank: 0,             // geymt í banka (öruggt)
   heat: 0,             // 0–100, hættuþrep
   inventory: {},       // { kok: 0, smakk: 0, ... }
@@ -110,10 +110,10 @@ interestRate = day <= 10 ? 0.08 : day <= 20 ? 0.12 : 0.15
 debt += Math.round(debt × interestRate)
 ```
 
-- Bjarni Bróðir er fictional lánshákarl. Ekki raunveruleg persóna.
+- Jón Bróðir er fictional lánshákarl. Ekki raunveruleg persóna.
 - Hægt að borga skuld hvenær sem er (hvaða upphæð).
 - Hægt að taka meira lán (allt að 1M í einu).
-- Ef skuld > 2M eftir dag 20: Bjarni sendir menn (event).
+- Ef skuld > 2M eftir dag 20: Jón sendir menn (event).
 
 ### 5.2 Heat (0–100)
 
@@ -142,12 +142,12 @@ riskMultiplier = 1 + (heat / 100) ** 2
 **Heat hefur áhrif á:**
 - Líkur á löggu razziu
 - Líkur á ráni
-- Líkur á Bjarni pressure events
+- Líkur á Jón pressure events
 - Almennar "slæmar fréttir" events
 
 ### 5.3 Banki
 
-- Geyma peninga öruggt — verndað gegn ránum og Bjarna
+- Geyma peninga öruggt — verndað gegn ránum og Jóns
 - Aðgengilegt í Reykjavík og Akureyri
 - Leggja inn / taka út — engin þóknun
 
@@ -165,7 +165,7 @@ riskMultiplier = 1 + (heat / 100) ** 2
 | Byssa | 80.000 | 40% | Klassík |
 | Riffill | 250.000 | 70% | Alvarlegur búnaður |
 
-Vörn = líkur á að komast undan löggu, ráni eða mönnum Bjarna. Ekki combat — defensive role eingöngu.
+Vörn = líkur á að komast undan löggu, ráni eða mönnum Jóns. Ekki combat — defensive role eingöngu.
 
 ### 5.6 Trenchcoat
 
@@ -223,7 +223,7 @@ Tengjast player state.
 | Event | Base weight | Áhrif |
 |-------|------------|-------|
 | 🍺 Rán | 0.06 × riskMult | Missa 10–35% af cash |
-| 🦈 Bjarni sendir menn | 0–0.15 (skuld/dagur) | Cash + vöru loss |
+| 🦈 Jón sendir menn | 0–0.15 (skuld/dagur) | Cash + vöru loss |
 | 🎁 Finnur vöru | 0.05 | 2–10 einingar af random efni |
 | 💀 Slæm sending | 0.04 | Hluti af vöru eyðilegst |
 | 🤝 Gamall vinur svíkur | 0.03 | Stash í Rvk minnkar um 20% |
@@ -233,7 +233,7 @@ Tengjast player state.
 ### 6.3 Weighted logic
 
 - Hátt heat: löggu/rán events fá `× riskMultiplier`
-- Há skuld + dagur ≥ 20: Bjarni events fá `× 0.15`
+- Há skuld + dagur ≥ 20: Jón events fá `× 0.15`
 - Staðsetning: ferju-seinkun aðeins í Vestmannaeyjum/Seyðisfirði
 - Jarðhiti deal líklegri í Hveragerði
 - Ferðamannasveifla líklegri í Rvk/Kef
@@ -242,7 +242,7 @@ Tengjast player state.
 
 ```
 "🌋 ELDGOS Í REYKJANESI! Innflutningur stöðvast."
-"📞 Bjarni: 'Skuldin þín er farin að verða vandræðaleg.'"
+"📞 Jón: 'Skuldin þín er farin að verða vandræðaleg.'"
 "🌨️ Snjóstormur — ferðin tekur 2 daga."
 "🤝 Gamall vinur svíkur þig. Stash í Rvk minnkaði."
 "⚖️ Lögmaður reddar þér. Heat lækkar."
@@ -293,7 +293,7 @@ Skuld dag 30 (ef engin borgun): `650.000 × (1.08^10) × (1.12^10) × (1.15^10) 
 "Skuldin er farin að verða vandræðaleg."
 "Það eru augun á þér alls staðar."
 "Þetta leit betur út í símanum."
-"Bjarni sendir kveðju. Ekki þá góðu."
+"Jón sendir kveðju. Ekki þá góðu."
 "Heat: 73%. Einhver er að fylgjast með."
 "Ferjan er seinkuð. Aftur."
 ```
