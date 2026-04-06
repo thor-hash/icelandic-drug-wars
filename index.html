@@ -179,11 +179,11 @@ const LOCATIONS = [
 // Icelandic drug names + display
 const DRUGS = [
   { id:'kok', name:'Kók', eng:'Cocaine', emoji:'❄️' },
-  { id:'smakk', name:'Smakk', eng:'Heroin', emoji:'💉' },
+  { id:'smakk', name:'MDMA', eng:'Ecstasy', emoji:'💜' },
   { id:'syra', name:'Sýra', eng:'LSD', emoji:'🌈' },
   { id:'amf', name:'Amf', eng:'Speed', emoji:'⚡' },
   { id:'gras', name:'Gras', eng:'Weed', emoji:'🌿' },
-  { id:'lud', name:'Lúð', eng:'Quaaludes', emoji:'💊' },
+  { id:'lud', name:'Sveppir', eng:'Mushrooms', emoji:'🍄' },
 ];
 
 const DRUG_IDS = DRUGS.map(d => d.id);
@@ -385,7 +385,7 @@ function rollAndProcessEvent() {
     ['kok','smakk'].forEach(d => {
       state.prices[d] = Math.round(state.prices[d] * (2 + Math.random()));
     });
-    state.eventMsg = { msg:'🌋 ELDGOS Í REYKJANESI! Innflutningur stöðvast — Kók og Smakk verð rokkar!', cls:'bad' };
+    state.eventMsg = { msg:'🌋 ELDGOS Í REYKJANESI! Innflutningur stöðvast — Kók og MDMA verð rokkar!', cls:'bad' };
     return false;
   }
   if(chosen === 'snjostormur') {
@@ -511,9 +511,9 @@ function rollAndProcessEvent() {
   }
   // PRD v3.5: New events
   if(chosen === 'tollur') {
-    // Customs crackdown — imported drugs (Kók, Smakk) spike
+    // Customs crackdown — imported drugs (Kók, MDMA) spike
     ['kok','smakk'].forEach(d => { state.prices[d] = Math.round(state.prices[d] * 1.4); });
-    state.eventMsg = { msg:'🛃 Tollurinn herðir eftirlit! Innflutt efni (Kók, Smakk) hækkar um 40%!', cls:'bad' };
+    state.eventMsg = { msg:'🛃 Tollurinn herðir eftirlit! Innflutt efni (Kók, MDMA) hækkar um 40%!', cls:'bad' };
     return false;
   }
   if(chosen === 'vinur_svikur') {

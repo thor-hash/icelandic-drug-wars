@@ -72,11 +72,11 @@ Jákvætt score = sigur. Neikvætt = Bjarni sendir menn.
 | Efni | Emoji | Base verð | Lágmark | Hámark |
 |------|-------|-----------|---------|--------|
 | Kók | ❄️ | 15.000 | 8.000 | 25.000 |
-| Smakk | 💉 | 13.000 | 7.000 | 20.000 |
+| MDMA | 💜 | 13.000 | 7.000 | 20.000 |
 | Sýra | 🌈 | 5.000 | 2.500 | 8.000 |
 | Amf | ⚡ | 3.000 | 1.500 | 5.000 |
 | Gras | 🌿 | 2.000 | 800 | 3.500 |
-| Lúð | 💊 | 2.800 | 1.200 | 4.500 |
+| Sveppir | 🍄 | 2.800 | 1.200 | 4.500 |
 
 ### 4.2 Verðformúla
 
@@ -86,10 +86,10 @@ price = clamp(price, min, max)
 ```
 
 - **locationMultiplier** — sjá töflu í kafla 3
-- **eventModifier** — 1.0 default, breytist ef event er virkt (t.d. eldgos = 2.5× á Kók/Smakk)
+- **eventModifier** — 1.0 default, breytist ef event er virkt (t.d. eldgos = 2.5× á Kók/MDMA)
 - **random** — 0.8 til 1.2, reiknað á hverjum degi
 
-**Hönnunarsjónarmið:** Kók og Smakk eru high-risk/high-reward. Gras og Lúð eru volume strategy. Keflavík er alltaf dýrt (import). Seyðisfjörður er alltaf ódýrt (einangrun).
+**Hönnunarsjónarmið:** Kók og MDMA eru high-risk/high-reward. Gras og Sveppir eru volume strategy. Keflavík er alltaf dýrt (import). Seyðisfjörður er alltaf ódýrt (einangrun).
 
 ---
 
@@ -200,12 +200,12 @@ Hafa áhrif á verð eða leikjaumhverfi.
 
 | Event | Base weight | Áhrif |
 |-------|------------|-------|
-| 🌋 Eldgos | 0.06 | Kók/Smakk verð ×2–3 |
+| 🌋 Eldgos | 0.06 | Kók/MDMA verð ×2–3 |
 | 💸 Krónan fellur | 0.04 | Allt verð +20% |
 | 🧳 Ferðamannasveifla | 0.08 | Kók/Gras hækkar í Rvk/Kef |
 | ♨️ Jarðhiti deal | 0.06 (0.10 í Hveragerði) | Gras verð ×0.3–0.6 |
 | 📱 Facebook-deal | 0.05 | Random efni á 30–60% afslætti |
-| 🛃 Tollurinn herðir | 0.04 | Innflutt efni (Kók, Smakk) +40% í 1 dag |
+| 🛃 Tollurinn herðir | 0.04 | Innflutt efni (Kók, MDMA) +40% í 1 dag |
 
 #### Local events
 Tengjast staðsetningu.
@@ -263,8 +263,8 @@ Tengjast player state.
 
 ### Stefnur
 
-- **Volume strategy:** Gras og Lúð — lítil áhætta, lág verð, mikið magn. Krefst stórs trenchcoat.
-- **Risk strategy:** Kók og Smakk — há áhætta, há verð, lítið magn. Meira heat.
+- **Volume strategy:** Gras og Sveppir — lítil áhætta, lág verð, mikið magn. Krefst stórs trenchcoat.
+- **Risk strategy:** Kók og MDMA — há áhætta, há verð, lítið magn. Meira heat.
 - **Blönduð:** Best fyrir flesta — byrja á volume, skipta yfir í risk þegar sterkari.
 
 ### Win condition

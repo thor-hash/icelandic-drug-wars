@@ -20,8 +20,8 @@
 
 ## v3.0 (Lokið)
 - [x] Nýtt heiti: "Krónan Brennur — Drug Wars: Ísland"
-- [x] Íslensk dópnöfn: Kók, Smakk, Sýra, Amf, Gras, Lúð
-- [x] Emoji við hvert efni (❄️💉🌈⚡🌿💊)
+- [x] Íslensk dópnöfn: Kók, MDMA, Sýra, Amf, Gras, Sveppir
+- [x] Emoji við hvert efni (❄️💜🌈⚡🌿🍄)
 - [x] Hærra verðbil (8K-30K fyrir Kók osfrv.)
 - [x] Hærri byrjunargildi (250K cash, 650K skuld)
 - [x] Bjarni Bróðir sem lánshákarl (með persónuleika)
