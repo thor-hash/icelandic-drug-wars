@@ -24,7 +24,7 @@
 - [x] Emoji við hvert efni (❄️💜🌈⚡🌿🍄)
 - [x] Hærra verðbil (8K-30K fyrir Kók osfrv.)
 - [x] Hærri byrjunargildi (250K cash, 650K skuld)
-- [x] Jón Bróðir sem lánshákarl (með persónuleika)
+- [x] Stóri Jón sem lánshákarl (með persónuleika)
 - [x] Allur texti á íslensku (UI labels, events, skilaboð)
 - [x] Íslenskir events: Eldgos, Snjóstormur, Ferju-seinkun
 - [x] Krónan fellur event (allt +20%)

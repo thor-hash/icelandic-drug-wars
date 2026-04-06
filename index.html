@@ -755,7 +755,7 @@ function rollAndProcessEvent() {
   }
   if(chosen === 'bjarni') {
     if(Math.random() < wep.defense * 0.5) {
-      state.eventMsg = { msg:'🦈 Menn Jóns komu... en þú komst undan!', cls:'good' };
+      state.eventMsg = { msg:'🦈 Menn Stóra Jóns komu... en þú komst undan!', cls:'good' };
       return false;
     }
     const lost = Math.floor(state.cash * (0.3 + Math.random()*0.4));
@@ -766,7 +766,7 @@ function rollAndProcessEvent() {
       const ql = Math.ceil(state.inventory[d] * 0.3);
       state.inventory[d] = Math.max(0, state.inventory[d] - ql);
     }
-    state.eventMsg = { msg:`🦈 MENN JÓNS BRÓÐUR! "Hvar er peningurinn, strákur?" Misstir ${fmtISK(lost)}!`, cls:'bad' };
+    state.eventMsg = { msg:`🦈 MENN STÓRA JÓNS! "Hvar er peningurinn, strákur?" Misstir ${fmtISK(lost)}!`, cls:'bad' };
     return false;
   }
   if(chosen === 'bad_batch') {
@@ -860,7 +860,7 @@ function renderTitle() {
  ╚═══════════════════════════╝</div>
       <div class="title-sub">30 dagar. Ein skuld. Engin leið til baka.</div>
       <div class="title-desc">
-        Þú skuldar Jóns Bróður ${fmtISK(START_DEBT)}.
+        Þú skuldar Stóra Jóns ${fmtISK(START_DEBT)}.
         Þú átt ${TOTAL_DAYS} daga til að borga.
         Keyrðu á milli bæja, verslaðu á götunni, forðastu lögguna.
         <br><span style="color:var(--red-bright)">Vextir: 8% → 12% → 15%</span> <span style="color:var(--dim)">(hækka dag 10 og 20)</span>
@@ -886,7 +886,7 @@ const DAILY_FLAVOR = [
   'Dagur ${d}. Þú ert ennþá á lífi.',
   'Dagur ${d}. Skuldin bíður.',
   'Dagur ${d}. Krónan heldur áfram að falla.',
-  'Dagur ${d}. Jón minnist á þig.',
+  'Dagur ${d}. Stóri Jón minnist á þig.',
   'Dagur ${d}. Einhver er að fylgjast með.',
   'Dagur ${d}. Þetta leit betur út í símanum.',
   'Dagur ${d}. Veðrið versnar.',
@@ -973,7 +973,7 @@ function renderMarket() {
         <button class="btn travel" onclick="state.phase='travel';render()">🚗 Ferð</button>
       </div>
       <div class="btn-row" style="margin-top:6px;">
-        <button class="btn magenta" onclick="state.phase='loanshark';render()">🦈 Jón</button>
+        <button class="btn magenta" onclick="state.phase='loanshark';render()">🦈 Stóri Jón</button>
         ${loc.hasBank?'<button class="btn" onclick="state.phase=\'bank\';render()">🏦 Banki</button>':''}
         ${loc.hasStash?'<button class="btn magenta" onclick="state.phase=\'stash\';render()">🏠 Stash</button>':''}
         <button class="btn" onclick="state.phase='blackmarket';render()">🔫 Svartam.</button>
@@ -991,7 +991,7 @@ function renderLoanShark() {
   $game.innerHTML = `
     ${renderHeader()}
     <div class="content">
-      <div class="section-title">🦈 Jón Bróðir — Lánshákarl</div>
+      <div class="section-title">🦈 Stóri Jón — Lánshákarl</div>
       <div class="event-box" style="border-left-color:var(--yellow-dim);">
         "Sæll strákur... skuldin þín er <span style="color:var(--red-bright)">${fmtISK(state.debt)}</span>."<br>
         "Vextir: <span style="color:var(--yellow-bright)">${fmtISK(ipd)}</span> á dag (${Math.round(rate*100)}% — ${phase})."<br>
@@ -1029,7 +1029,7 @@ function payDebt() {
   if(amt <= 0) return;
   state.cash -= amt; state.debt -= amt;
   state.phase = 'market';
-  state.eventMsg = { msg:`💰 Borgaðir ${fmtISK(amt)} til Jóns. Eftirstöðvar: ${fmtISK(state.debt)}`, cls:'good' };
+  state.eventMsg = { msg:`💰 Borgaðir ${fmtISK(amt)} til Stóra Jóns. Eftirstöðvar: ${fmtISK(state.debt)}`, cls:'good' };
   render();
 }
 
@@ -1038,7 +1038,7 @@ function takeLoan() {
   if(amt <= 0) return;
   state.cash += amt; state.debt += amt;
   state.phase = 'market';
-  state.eventMsg = { msg:`🦈 Tókst ${fmtISK(amt)} lán hjá Jóni. Skuld: ${fmtISK(state.debt)}`, cls:'bad' };
+  state.eventMsg = { msg:`🦈 Tókst ${fmtISK(amt)} lán hjá Stóra Jóni. Skuld: ${fmtISK(state.debt)}`, cls:'bad' };
   render();
 }
 
@@ -1052,7 +1052,7 @@ function renderBank() {
         Inneign: <span style="color:var(--yellow-bright)">${fmtISK(state.bank)}</span><br>
         Cash: <span style="color:var(--text-bright)">${fmtISK(state.cash)}</span>
       </div>
-      <div style="color:var(--dim);font-size:14px;margin-bottom:8px;">Peningar í banka eru öruggir gegn ránum og Jóni.</div>
+      <div style="color:var(--dim);font-size:14px;margin-bottom:8px;">Peningar í banka eru öruggir gegn ránum og Stóra Jóni.</div>
       <div class="section-title">Leggja inn</div>
       <div class="qty-section">
         <div class="qty-row">
@@ -1374,11 +1374,11 @@ function renderEnd() {
     if(profit > 0) {
       title = '💰 ÞÚ VANNST';
       titleColor = 'var(--good-bright)';
-      msg = 'Þú borgaðir Jóns Bróður og græddir. Ekki slæmt.';
+      msg = 'Þú borgaðir Stóra Jóns og græddir. Ekki slæmt.';
     } else {
       title = '💀 GAME OVER';
       titleColor = 'var(--red-bright)';
-      msg = 'Þú borgaðir ekki skuldina. Jón Bróðir sendi menn...';
+      msg = 'Þú borgaðir ekki skuldina. Stóri Jón sendi menn...';
     }
     scoreText = `
       Cash: ${fmtISK(state.cash)}<br>

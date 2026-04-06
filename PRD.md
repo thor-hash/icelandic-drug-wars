@@ -11,7 +11,7 @@
 
 Íslensk útgáfa af klassíska Drug Wars (1984). Single HTML file, retro terminal-stíll. Allur texti á íslensku. Þurr kaldhæðni frekar en dramatík.
 
-Þú ert eiturlyfjasali með 30 daga til að borga Jóns Bróður skuldina þína. Kauptu lágt, seldu hátt, ferðastu á milli bæja. Skuldin hækkar á hverjum degi. Lögreglan fylgist með.
+Þú ert eiturlyfjasali með 30 daga til að borga Stóra Jóns skuldina þína. Kauptu lágt, seldu hátt, ferðastu á milli bæja. Skuldin hækkar á hverjum degi. Lögreglan fylgist með.
 
 **Sigurskilyrði:** `score = cash + banki + inventoryValue - skuld`
 Jákvætt score = sigur. Neikvætt = Jón sendir menn.
@@ -110,7 +110,7 @@ interestRate = day <= 10 ? 0.08 : day <= 20 ? 0.12 : 0.15
 debt += Math.round(debt × interestRate)
 ```
 
-- Jón Bróðir er fictional lánshákarl. Ekki raunveruleg persóna.
+- Stóri Jón er fictional lánshákarl. Ekki raunveruleg persóna.
 - Hægt að borga skuld hvenær sem er (hvaða upphæð).
 - Hægt að taka meira lán (allt að 1M í einu).
 - Ef skuld > 2M eftir dag 20: Jón sendir menn (event).
