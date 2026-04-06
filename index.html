@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="is">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>Icelandic Drug Wars</title>
+<title>Krónan Brennur — Drug Wars: Ísland</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
 :root {
@@ -31,7 +31,6 @@ html, body {
   max-width:600px; margin:0 auto;
   position:relative;
 }
-/* Scanline effect */
 #game::after {
   content:''; position:absolute; inset:0; pointer-events:none;
   background:repeating-linear-gradient(0deg,rgba(0,0,0,0.15) 0px,rgba(0,0,0,0.15) 1px,transparent 1px,transparent 3px);
@@ -42,7 +41,7 @@ html, body {
   padding:8px 12px; flex-shrink:0;
 }
 .header-title {
-  font-family:'Press Start 2P',monospace; font-size:11px;
+  font-family:'Press Start 2P',monospace; font-size:10px;
   color:var(--amber); text-align:center; margin-bottom:6px;
   text-shadow:0 0 10px rgba(255,176,0,0.5);
 }
@@ -53,7 +52,6 @@ html, body {
 .header-stats .label { color:var(--dim); }
 .header-stats .val-cash { color:var(--amber); }
 .header-stats .val-debt { color:var(--red); }
-
 .content {
   flex:1; overflow-y:auto; padding:8px 12px;
   -webkit-overflow-scrolling:touch;
@@ -62,7 +60,6 @@ html, body {
 .content::-webkit-scrollbar { width:4px; }
 .content::-webkit-scrollbar-track { background:var(--bg); }
 .content::-webkit-scrollbar-thumb { background:var(--dim); border-radius:2px; }
-
 .section-title {
   color:var(--cyan); font-size:16px; margin:8px 0 4px;
   border-bottom:1px solid #1a3a3a; padding-bottom:2px;
@@ -74,8 +71,6 @@ html, body {
 }
 .event-box.bad { background:#1a0000; border-color:#330000; color:var(--red); }
 .event-box.good { background:#001a00; border-color:#003300; color:var(--green); }
-
-/* Price table */
 .price-table { width:100%; border-collapse:collapse; margin:4px 0; }
 .price-table th { color:var(--cyan); text-align:left; font-weight:normal; font-size:14px; padding:2px 6px; border-bottom:1px solid var(--border); }
 .price-table td { padding:3px 6px; font-size:16px; border-bottom:1px solid #111; }
@@ -83,15 +78,13 @@ html, body {
 .price-table .price { color:var(--amber); text-align:right; }
 .price-table .inv { color:var(--dim); text-align:right; }
 .price-table tr:hover td { background:#0a1a0a; }
-
-/* Buttons */
 .actions {
   padding:8px 12px; border-top:1px solid var(--border);
   background:var(--panel); flex-shrink:0;
 }
 .btn-row { display:flex; gap:6px; flex-wrap:wrap; }
 .btn {
-  flex:1; min-width:80px; padding:10px 6px;
+  flex:1; min-width:70px; padding:10px 6px;
   background:#0a1a0a; border:1px solid var(--dim);
   color:var(--green); font-family:'VT323',monospace; font-size:17px;
   cursor:pointer; border-radius:4px; text-align:center;
@@ -104,16 +97,12 @@ html, body {
 .btn.sell:active { background:var(--amber); color:var(--bg); }
 .btn.danger { border-color:var(--red); color:var(--red); }
 .btn.danger:active { background:var(--red); color:var(--bg); }
+.btn.magenta { border-color:var(--magenta); color:var(--magenta); }
+.btn.magenta:active { background:var(--magenta); color:var(--bg); }
 .btn.big { padding:14px; font-size:20px; min-width:100%; }
 .btn:disabled { opacity:0.3; pointer-events:none; }
-
-/* Qty input */
-.qty-section {
-  display:flex; flex-direction:column; gap:6px; margin:6px 0;
-}
-.qty-row {
-  display:flex; align-items:center; gap:8px;
-}
+.qty-section { display:flex; flex-direction:column; gap:6px; margin:6px 0; }
+.qty-row { display:flex; align-items:center; gap:8px; }
 .qty-input {
   background:#0a1a0a; border:1px solid var(--dim); color:var(--green);
   font-family:'VT323',monospace; font-size:20px;
@@ -122,15 +111,13 @@ html, body {
 }
 .qty-input::-webkit-inner-spin-button { -webkit-appearance:none; }
 .qty-info { color:var(--dim); font-size:15px; }
-
-/* Title screen */
 .title-screen {
   display:flex; flex-direction:column; align-items:center;
   justify-content:center; text-align:center; gap:16px;
-  padding:2rem; height:100%;
+  padding:2rem; height:100%; overflow-y:auto;
 }
 .title-ascii {
-  font-family:'Press Start 2P',monospace; font-size:10px;
+  font-family:'Press Start 2P',monospace; font-size:9px;
   color:var(--green); line-height:1.3;
   text-shadow:0 0 15px rgba(51,255,51,0.3);
   white-space:pre;
@@ -139,19 +126,10 @@ html, body {
   font-size:22px; color:var(--amber);
   text-shadow:0 0 10px rgba(255,176,0,0.3);
 }
-.title-desc {
-  font-size:16px; color:var(--dim); max-width:360px; line-height:1.4;
-}
-.title-towns {
-  font-size:14px; color:var(--cyan); line-height:1.6;
-}
-
-/* End screen */
+.title-desc { font-size:16px; color:var(--dim); max-width:360px; line-height:1.4; }
+.title-towns { font-size:14px; color:var(--cyan); line-height:1.6; }
 .end-title { font-family:'Press Start 2P',monospace; font-size:14px; margin-bottom:8px; }
 .end-score { font-size:28px; color:var(--amber); margin:8px 0; }
-.end-detail { font-size:16px; color:var(--dim); line-height:1.6; }
-
-/* Travel list */
 .town-btn {
   display:block; width:100%; padding:10px 12px; margin:4px 0;
   background:#0a1a1a; border:1px solid #1a3a3a;
@@ -161,223 +139,414 @@ html, body {
 }
 .town-btn:active { background:var(--cyan); color:var(--bg); }
 .town-btn .town-desc { color:var(--dim); font-size:14px; }
-
-/* Location flavor */
-.location-flavor {
-  color:var(--dim); font-size:14px; font-style:italic;
-  margin:2px 0 6px; line-height:1.3;
-}
+.location-flavor { color:var(--dim); font-size:14px; font-style:italic; margin:2px 0 6px; line-height:1.3; }
+.heat-bar { display:flex; align-items:center; gap:6px; margin:2px 0; }
+.heat-bar .bar-bg { flex:1; height:8px; background:#1a0a0a; border:1px solid #330000; border-radius:3px; overflow:hidden; }
+.heat-bar .bar-fill { height:100%; background:var(--red); transition:width 0.3s; }
+.heat-label { color:var(--red); font-size:13px; min-width:50px; }
 </style>
 </head>
 <body>
 <div id="game"></div>
 <script>
 // ============================================================
-// ICELANDIC DRUG WARS — Classic 1984 Drug Wars for Iceland
+//  KRÓNAN BRENNUR — Drug Wars: Ísland  (v3.5)
+//  "30 dagar til að borga lánshákarlinn áður en eldgosið eyðileggur allt"
 // ============================================================
 
-// === CONSTANTS ===
 const TOTAL_DAYS = 30;
-const START_CASH = 200000;
-const START_DEBT = 550000;
-const MAX_SPACE = 100;
+const START_CASH = 250000;
+const START_DEBT = 650000;
+const START_SPACE = 100;
+
+// Progressive interest — pressure eykst eftir því sem líður á leikinn
+function getInterestRate(day) {
+  if(day <= 10) return 0.08;   // Early: svigrúm
+  if(day <= 20) return 0.12;   // Mid: optimization
+  return 0.15;                  // Late: survival panic
+}
 
 const LOCATIONS = [
-  { id:'reykjavik', name:'Reykjavík', desc:'Höfuðborgin — stærsti markaðurinn.' },
-  { id:'vestmannaeyjar', name:'Vestmannaeyjar', desc:'Eyjabær — ferja og fiskur.' },
-  { id:'hveragerdi', name:'Hveragerði', desc:'Jarðhitabærinn — heitar uppsprettur.' },
-  { id:'keflavik', name:'Keflavík', desc:'Flugvallarstaðurinn — import og útflutningur.' },
-  { id:'seydisfjordur', name:'Seyðisfjörður', desc:'Fjarskipt austur — einsamt og hættulegt.' },
+  { id:'reykjavik', name:'Reykjavík', desc:'Höfuðborgin — dýrt, ferðamenn, lögregla.', heatDecay:3, mult:1.0, hasBank:true, hasStash:true },
+  { id:'vestmannaeyjar', name:'Vestmannaeyjar', desc:'Eyjabær — ferja, oft seinkun.', heatDecay:7, mult:1.1 },
+  { id:'hveragerdi', name:'Hveragerði', desc:'Jarðhitabærinn — góð deals á náttúrulegum vörum.', heatDecay:6, mult:0.85 },
+  { id:'keflavik', name:'Keflavík', desc:'Flugvöllurinn — innflutningur, hæst verð.', heatDecay:4, mult:1.25 },
+  { id:'seydisfjordur', name:'Seyðisfjörður', desc:'Einangrað — ódýrast en hættulegt. Snjóflóð.', heatDecay:8, mult:0.75 },
+  { id:'akureyri', name:'Akureyri', desc:'Norðurlandshöfuðborg — stöðugur markaður.', heatDecay:6, mult:0.95, hasBank:true },
+  { id:'isafjordur', name:'Ísafjörður', desc:'Vestfirðir — dýrt en örugt.', heatDecay:10, mult:1.15 },
 ];
 
-const DRUGS = ['Cocaine','Heroin','Acid','Speed','Weed','Quaaludes'];
+// Icelandic drug names + display
+const DRUGS = [
+  { id:'kok', name:'Kók', eng:'Cocaine', emoji:'❄️' },
+  { id:'smakk', name:'Smakk', eng:'Heroin', emoji:'💉' },
+  { id:'syra', name:'Sýra', eng:'LSD', emoji:'🌈' },
+  { id:'amf', name:'Amf', eng:'Speed', emoji:'⚡' },
+  { id:'gras', name:'Gras', eng:'Weed', emoji:'🌿' },
+  { id:'lud', name:'Lúð', eng:'Quaaludes', emoji:'💊' },
+];
 
-// Price ranges: location_id → drug → [min, max]
-const PRICES = {
-  reykjavik:      { Cocaine:[4000,12000], Heroin:[3500,11000], Acid:[1200,4000], Speed:[800,2800], Weed:[400,1600], Quaaludes:[600,2200] },
-  vestmannaeyjar: { Cocaine:[5000,15000], Heroin:[4000,13000], Acid:[800,3500],  Speed:[600,2500], Weed:[300,1400], Quaaludes:[500,2000] },
-  hveragerdi:     { Cocaine:[3000,10000], Heroin:[2800,9000],  Acid:[1500,5000], Speed:[1000,3200],Weed:[500,1800], Quaaludes:[700,2500] },
-  keflavik:       { Cocaine:[6000,18000], Heroin:[5000,14000], Acid:[1000,4200], Speed:[700,2900], Weed:[350,1500], Quaaludes:[550,2100] },
-  seydisfjordur:  { Cocaine:[2500,9000],  Heroin:[3000,10000], Acid:[900,3800],  Speed:[500,2200], Weed:[250,1200], Quaaludes:[400,1800] },
+const DRUG_IDS = DRUGS.map(d => d.id);
+
+// Base prices per drug — PRD v3.5 formula: price = base × locMult × eventMod × random(0.8, 1.2)
+const BASE_PRICES = {
+  kok:   { base:15000, min:8000, max:25000 },
+  smakk: { base:13000, min:7000, max:20000 },
+  syra:  { base:5000,  min:2500, max:8000 },
+  amf:   { base:3000,  min:1500, max:5000 },
+  gras:  { base:2000,  min:800,  max:3500 },
+  lud:   { base:2800,  min:1200, max:4500 },
 };
 
-// Random events
-const EVENTS = [
-  { type:'bust_partial', chance:0.08, msg:'🚔 LÖGREGLAN! Þeir tóku hluta af birgðunum þínum!', cls:'bad' },
-  { type:'bust_full', chance:0.03, msg:'🚨 LÖGREGLAN GRÍPUR ÞIG! Allt týnt... Game over.', cls:'bad' },
-  { type:'mugging', chance:0.08, msg:'🔪 Þú varst ráðinn! Missti hluta af peningunum.', cls:'bad' },
-  { type:'price_spike', chance:0.10, msg:'', cls:'event' },
-  { type:'price_drop', chance:0.10, msg:'', cls:'good' },
-  { type:'find_drugs', chance:0.06, msg:'', cls:'good' },
-  { type:'bad_batch', chance:0.05, msg:'💀 Slæm sending! Hluti af birgðum þínum er ónothæfur.', cls:'bad' },
-  { type:'nothing', chance:0.50, msg:'', cls:'' },
+// Weapons
+const WEAPONS = [
+  { id:'none', name:'Ekkert', price:0, defense:0 },
+  { id:'knife', name:'Hnífur', price:0, defense:0.15 },
+  { id:'pistol', name:'Byssa', price:80000, defense:0.40 },
+  { id:'rifle', name:'Riffill', price:250000, defense:0.70 },
 ];
 
-const SPIKE_MSGS = [
-  'Volcanic ash delays shipments — {drug} prices SPIKE!',
-  'Customs seized a big shipment — {drug} is scarce!',
-  'A celebrity was caught with {drug} — demand explodes!',
-  'Ferry breakdown cuts supply — {drug} prices soar!',
-];
-const DROP_MSGS = [
-  'A huge batch of {drug} washed ashore!',
-  'Competition floods the market — cheap {drug} everywhere!',
-  'Dealer got busted — his {drug} stash is on the street!',
-  'Tunnel from Keflavík opened — {drug} supply surges!',
-];
-const FIND_MSGS = [
-  'You found {qty} units of {drug} on the ground!',
-  'A dealer dropped {qty} units of {drug} running from cops!',
-  'Anonymous tip led you to {qty} units of {drug}!',
+const COATS = [
+  { id:'basic', name:'Basic Trenchcoat', space:100, price:0 },
+  { id:'medium', name:'Stór Trenchcoat', space:150, price:120000 },
+  { id:'large', name:'Duffel Bag', space:200, price:300000 },
 ];
 
 const LOCATION_FLAVOR = {
   reykjavik: [
-    'Laugavegur is buzzing with tourists and shady deals.',
-    'Rain drizzles over the Hallgrímskirkja skyline.',
-    'The smell of pylsur mixes with something less legal.',
-    'A cold wind blows down from Esja.',
+    'Laugavegur þéttsetinn ferðamönnum og skuggalegum viðskiptum.',
+    'Rigning drífa yfir Hallgrímskirkju.',
+    'Lykt af pylsum blandast einhverju ólöglegu.',
+    'Kaldur vindur blæs niður af Esju.',
+    'Ferðamaður í Canada Goose jakka er að spyrja um "local experience".',
   ],
   vestmannaeyjar: [
-    'The ferry horn echoes across the harbor.',
-    'Puffins watch you from the cliffs. They know.',
-    'Eldfell volcano looms overhead — a reminder of 1973.',
-    'Fishermen offload their catch. And maybe more.',
+    'Ferjuhornið bergmálar yfir höfnina.',
+    'Lundinn horfir á þig af klettanum. Hann veit.',
+    'Eldfell gnæfir yfir — minnisvarði frá 1973.',
+    'Sjómenn losa aflann. Og kannski meira.',
+    'Vindur hvínir — ferjan er seinkuð aftur.',
   ],
   hveragerdi: [
-    'Steam rises from the hot springs. Good cover.',
-    'Greenhouses glow in the darkness — what\'s really growing?',
-    'The earthquake museum shakes as you enter town.',
-    'The river runs warm. Business runs hot.',
+    'Gufa rís úr heitum lindum. Gott cover.',
+    'Gróðurhúsin ljóma í myrkrinu — hvað ræktar þú eiginlega?',
+    'Jarðskjálftasetrið hristist þegar þú kemur í bæinn.',
+    'Áin rennur heit. Viðskiptin líka.',
+    'Lyktin af brennisteini blandar fersku Grasi.',
   ],
   keflavik: [
-    'Planes roar overhead. Import or export?',
-    'The duty-free crowd provides good camouflage.',
-    'Old NATO base vibes — secrets live here.',
-    'International connections = international supply.',
+    'Flugvélar þjóta yfir. Innflutningur eða útflutningur?',
+    'Tax-free mannfjöldinn gefur gott skjól.',
+    'Gamlar NATO-bækistöðvar — leyndarmál búa hér.',
+    'Alþjóðleg tengsl = alþjóðleg framboð.',
+    'Ferðamenn á leiðinni heim — síðasta tækifærið til að selja.',
   ],
   seydisfjordur: [
-    'The Smyril Line ferry sits quietly in the fjord.',
-    'Colorful houses hide colorful secrets.',
-    'It\'s a long drive here. Worth it?',
-    'The east is wild. So is the market.',
+    'Smyril Line ferjan situr rólega í firðinum.',
+    'Litríkir húsir fela litríkar leyndarmál.',
+    'Löng keyrsla hingað. En það borgar sig.',
+    'Austurlandið er villt. Markaðurinn líka.',
+    'Snjóstormur liggur í loftinu — passaðu þig.',
+  ],
+  akureyri: [
+    'Norðurlandshöfuðborg — langt frá Reykjavíkurlöggu.',
+    'Lystigarðurinn fælir meira en blóm.',
+    'Snjóþaktar fjallstindar og stöðug eftirspurn.',
+    'Sundlaugarsögusögn er betri en fréttirnar.',
+    'Hér þekkist fólk — vertu varkár.',
+  ],
+  isafjordur: [
+    'Vestfirðir finnast eins og annar heimur.',
+    'Enginn kemur hingað nema hann verði. Eða vilji fela sig.',
+    'Vindurinn öskrar. Gott — þekur sporin þín.',
+    'Einangrun hefur sína kosti. Verðin eru einn þeirra.',
+    'Skammdegið er komið — enginn sér hvað þú ert að gera.',
   ],
 };
 
 // === STATE ===
 let state = {};
+let snowstormActive = false; // costs extra day
 
 function newGame() {
   state = {
     day: 1,
     cash: START_CASH,
     debt: START_DEBT,
+    bank: 0,
     location: 'reykjavik',
     inventory: {},
+    stash: {},
     prices: {},
     gameOver: false,
-    phase: 'title', // title, market, buy, sell, travel, event, end
+    phase: 'title',
     eventMsg: null,
     selectedDrug: null,
+    heat: 0,
+    coatLevel: 0,
+    weapon: 'knife',
+    interestPaid: 0,
+    ferryDelay: false,
   };
-  DRUGS.forEach(d => state.inventory[d] = 0);
+  DRUG_IDS.forEach(d => { state.inventory[d] = 0; state.stash[d] = 0; });
+  snowstormActive = false;
   generatePrices();
 }
 
-function getSpacesUsed() {
-  return Object.values(state.inventory).reduce((a,b) => a+b, 0);
-}
-
-function fmtISK(n) {
-  return n.toLocaleString('is-IS') + ' ISK';
-}
-
+function getDrug(id) { return DRUGS.find(d => d.id === id); }
+function getSpacesUsed() { return DRUG_IDS.reduce((a,d) => a + state.inventory[d], 0); }
+function getMaxSpace() { return COATS[state.coatLevel].space; }
+function getWeaponDef() { return WEAPONS.find(w => w.id === state.weapon) || WEAPONS[0]; }
+function fmtISK(n) { return Math.round(n).toLocaleString('is-IS') + ' kr'; }
 function randInt(a,b) { return Math.floor(Math.random()*(b-a+1))+a; }
 function pick(arr) { return arr[Math.floor(Math.random()*arr.length)]; }
 
-function generatePrices() {
+function generatePrices(eventMod) {
   const p = {};
-  const ranges = PRICES[state.location];
-  DRUGS.forEach(d => {
-    p[d] = randInt(ranges[d][0], ranges[d][1]);
+  const loc = LOCATIONS.find(l => l.id === state.location);
+  const locMult = loc ? loc.mult : 1.0;
+  const eMod = eventMod || {};
+  DRUG_IDS.forEach(d => {
+    const bp = BASE_PRICES[d];
+    const randomFactor = 0.8 + Math.random() * 0.4; // 0.8–1.2
+    const evMod = eMod[d] || 1.0;
+    let price = Math.round(bp.base * locMult * evMod * randomFactor);
+    price = Math.max(bp.min, Math.min(bp.max, price));
+    p[d] = price;
   });
   state.prices = p;
 }
 
-// === EVENTS ===
-function rollEvent() {
-  const roll = Math.random();
-  let cum = 0;
-  for(const ev of EVENTS) {
-    cum += ev.chance;
-    if(roll < cum) return ev;
-  }
-  return { type:'nothing', msg:'', cls:'' };
+function addHeat(n) { state.heat = Math.min(100, state.heat + n); }
+function decayHeat() {
+  const loc = LOCATIONS.find(l => l.id === state.location);
+  state.heat = Math.max(0, state.heat - (loc ? loc.heatDecay : 5));
 }
 
-function processEvent() {
-  const ev = rollEvent();
-  if(ev.type === 'nothing') { state.eventMsg = null; return false; }
-
-  if(ev.type === 'bust_full') {
-    state.eventMsg = { msg:ev.msg, cls:ev.cls };
-    state.gameOver = true;
-    state.phase = 'end';
-    state.endReason = 'busted';
-    return true;
+function applyInterest() {
+  if(state.debt > 0) {
+    const rate = getInterestRate(state.day);
+    const interest = Math.round(state.debt * rate);
+    state.debt += interest;
+    state.interestPaid += interest;
+    return interest;
   }
-  if(ev.type === 'bust_partial') {
-    const carried = DRUGS.filter(d => state.inventory[d] > 0);
+  return 0;
+}
+
+// === EVENTS ===
+function rollAndProcessEvent() {
+  // PRD v3.5: Quadratic heat scaling
+  const riskMult = 1 + (state.heat / 100) ** 2;
+  const sharkActive = state.day >= 20 && state.debt > 2000000;
+  const wep = getWeaponDef();
+
+  // PRD v3.5: Event probability scales with day
+  const baseEventChance = 0.25 + (state.day / 30) * 0.15; // 25% dag 1 → 40% dag 30
+  if(Math.random() > baseEventChance) { state.eventMsg = null; return false; }
+
+  // Weighted event table — Global / Local / Personal
+  const events = [
+    // Global events
+    { type:'eldgos', w:0.06 },
+    { type:'kronan', w:0.04 },
+    { type:'ferdamenn', w:0.08 },
+    { type:'jardhiti', w: state.location==='hveragerdi' ? 0.10 : 0.06 },
+    { type:'facebook', w:0.05 },
+    { type:'tollur', w:0.04 },
+    // Local events
+    { type:'snjostormur', w:0.05 },
+    { type:'ferja', w: (state.location==='vestmannaeyjar'||state.location==='seydisfjordur') ? 0.08 : 0.02 },
+    { type:'razzia', w:0.06*riskMult },
+    { type:'bust_full', w:0.02*riskMult },
+    // Personal events
+    { type:'drukkinn', w:0.06*riskMult },
+    { type:'bjarni', w: sharkActive ? 0.15 : 0 },
+    { type:'bad_batch', w:0.04 },
+    { type:'find', w:0.05 },
+    { type:'vinur_svikur', w:0.03 },
+    { type:'logmadur', w:0.03 },
+    { type:'fjarfestir', w:0.02 },
+  ];
+
+  const totalW = events.reduce((a, e) => a + e.w, 0);
+  const r = Math.random() * totalW;
+  let cum = 0;
+  let chosen = null;
+  for(const e of events) {
+    cum += e.w;
+    if(r < cum) { chosen = e.type; break; }
+  }
+  if(!chosen) { state.eventMsg = null; return false; }
+
+  // Process each event type
+  if(chosen === 'eldgos') {
+    // Volcano: import prices spike
+    ['kok','smakk'].forEach(d => {
+      state.prices[d] = Math.round(state.prices[d] * (2 + Math.random()));
+    });
+    state.eventMsg = { msg:'🌋 ELDGOS Í REYKJANESI! Innflutningur stöðvast — Kók og Smakk verð rokkar!', cls:'bad' };
+    return false;
+  }
+  if(chosen === 'snjostormur') {
+    snowstormActive = true;
+    state.eventMsg = { msg:'🌨️ SNJÓSTORMUR! Næsta ferð kostar 2 daga í staðinn fyrir 1!', cls:'bad' };
+    return false;
+  }
+  if(chosen === 'ferja') {
+    // Lose 1 day stuck
+    state.day++;
+    if(state.day > TOTAL_DAYS) {
+      state.phase = 'end'; state.endReason = 'time';
+      state.eventMsg = { msg:'⛴️ Ferjan seinkuð — þú misstir síðasta daginn!', cls:'bad' };
+      return true;
+    }
+    state.eventMsg = { msg:'⛴️ Ferjan er aflýst! Þú festist hér í dag — misstir 1 dag.', cls:'bad' };
+    return false;
+  }
+  if(chosen === 'razzia') {
+    if(Math.random() < wep.defense * 0.7) {
+      state.eventMsg = { msg:`🚔 Lögreglan reyndi razziu... en þú slappst undan!`, cls:'good' };
+      addHeat(10);
+      return false;
+    }
+    const carried = DRUG_IDS.filter(d => state.inventory[d] > 0);
     if(carried.length > 0) {
-      const drug = pick(carried);
-      const lost = Math.ceil(state.inventory[drug] * (0.2 + Math.random()*0.8));
-      state.inventory[drug] = Math.max(0, state.inventory[drug] - lost);
-      state.eventMsg = { msg: ev.msg + ` Missti ${lost} ${drug}.`, cls:ev.cls };
+      const d = pick(carried);
+      const lost = Math.ceil(state.inventory[d] * (0.3 + Math.random()*0.5));
+      state.inventory[d] = Math.max(0, state.inventory[d] - lost);
+      state.eventMsg = { msg:`🚔 LÖGREGLU RAZZIA! Þú misstir ${lost} ${getDrug(d).name}!`, cls:'bad' };
     } else {
       state.eventMsg = { msg:'🚔 Lögreglan stöðvaði þig... en þú áttir ekkert á þér. Slapp!', cls:'good' };
     }
     return false;
   }
-  if(ev.type === 'mugging') {
-    const lost = Math.floor(state.cash * (0.1 + Math.random()*0.4));
+  if(chosen === 'bust_full') {
+    if(Math.random() < wep.defense) {
+      state.eventMsg = { msg:`🚨 HANDTÖKUTILRAUN! En þú komst undan með ${wep.name}!`, cls:'good' };
+      addHeat(15);
+      return false;
+    }
+    state.eventMsg = { msg:'🚨 LÖGREGLAN GRÍPUR ÞIG! Allt týnt... Leikur búinn.', cls:'bad' };
+    state.gameOver = true; state.phase = 'end'; state.endReason = 'busted';
+    return true;
+  }
+  if(chosen === 'ferdamenn') {
+    // Tourist surge: Kók & Gras spike in Rvk/Kef
+    if(state.location === 'reykjavik' || state.location === 'keflavik') {
+      ['kok','gras'].forEach(d => { state.prices[d] = Math.round(state.prices[d] * (1.5 + Math.random()*0.8)); });
+      state.eventMsg = { msg:'🧳 FERÐAMANNASVEIFLA! Kók og Gras verð rokkar í ferðamannabænum!', cls:'bad' };
+    } else {
+      state.prices['gras'] = Math.round(state.prices['gras'] * (1.3 + Math.random()*0.5));
+      state.eventMsg = { msg:'🧳 Ferðamenn flæða inn — Gras eftirspurn eykst!', cls:'bad' };
+    }
+    return false;
+  }
+  if(chosen === 'jardhiti') {
+    state.prices['gras'] = Math.round(state.prices['gras'] * (0.3 + Math.random()*0.3));
+    state.eventMsg = { msg:'♨️ Jarðhiti-deal! Gras verð lækkar — gróðurhúsin eru full!', cls:'good' };
+    return false;
+  }
+  if(chosen === 'facebook') {
+    const d = pick(DRUG_IDS);
+    const disc = 0.3 + Math.random()*0.3;
+    state.prices[d] = Math.round(state.prices[d] * disc);
+    state.eventMsg = { msg:`📱 "Facebook-deal"! Einhver á Marketplace selur ${getDrug(d).name} á ${fmtISK(state.prices[d])}!`, cls:'good' };
+    return false;
+  }
+  if(chosen === 'drukkinn') {
+    if(Math.random() < wep.defense * 0.8) {
+      state.eventMsg = { msg:`🍺 Drukkinn ferðamaður reyndi að ræna þig — en þú varðst þig!`, cls:'good' };
+      return false;
+    }
+    const lost = Math.floor(state.cash * (0.1 + Math.random()*0.35));
     state.cash = Math.max(0, state.cash - lost);
-    state.eventMsg = { msg: ev.msg + ` Missti ${fmtISK(lost)}.`, cls:ev.cls };
+    state.eventMsg = { msg:`🍺 Drukkinn ferðamaður rændi þig á Laugavegi! Misstir ${fmtISK(lost)}.`, cls:'bad' };
     return false;
   }
-  if(ev.type === 'price_spike') {
-    const drug = pick(DRUGS);
-    const mult = 1.5 + Math.random()*1.5;
-    state.prices[drug] = Math.round(state.prices[drug] * mult);
-    const tmpl = pick(SPIKE_MSGS);
-    state.eventMsg = { msg: '📈 ' + tmpl.replace('{drug}',drug), cls:'bad' };
+  if(chosen === 'kronan') {
+    DRUG_IDS.forEach(d => { state.prices[d] = Math.round(state.prices[d] * 1.2); });
+    state.eventMsg = { msg:'💸 KRÓNAN FELLUR! Allt verð hækkar um 20%!', cls:'bad' };
     return false;
   }
-  if(ev.type === 'price_drop') {
-    const drug = pick(DRUGS);
-    const mult = 0.3 + Math.random()*0.4;
-    state.prices[drug] = Math.round(state.prices[drug] * mult);
-    const tmpl = pick(DROP_MSGS);
-    state.eventMsg = { msg: '📉 ' + tmpl.replace('{drug}',drug), cls:'good' };
+  if(chosen === 'bjarni') {
+    if(Math.random() < wep.defense * 0.5) {
+      state.eventMsg = { msg:'🦈 Menn Bjarna komu... en þú komst undan!', cls:'good' };
+      return false;
+    }
+    const lost = Math.floor(state.cash * (0.3 + Math.random()*0.4));
+    state.cash = Math.max(0, state.cash - lost);
+    const drugLost = DRUG_IDS.filter(d => state.inventory[d] > 0);
+    if(drugLost.length > 0) {
+      const d = pick(drugLost);
+      const ql = Math.ceil(state.inventory[d] * 0.3);
+      state.inventory[d] = Math.max(0, state.inventory[d] - ql);
+    }
+    state.eventMsg = { msg:`🦈 MENN BJARNA BRÓÐUR! "Hvar er peningurinn, strákur?" Misstir ${fmtISK(lost)}!`, cls:'bad' };
     return false;
   }
-  if(ev.type === 'find_drugs') {
-    const drug = pick(DRUGS);
-    const free = MAX_SPACE - getSpacesUsed();
-    if(free <= 0) { state.eventMsg = null; return false; }
-    const qty = Math.min(free, randInt(2, 12));
-    state.inventory[drug] += qty;
-    const tmpl = pick(FIND_MSGS);
-    state.eventMsg = { msg: '🎁 ' + tmpl.replace('{drug}',drug).replace('{qty}',qty), cls:'good' };
-    return false;
-  }
-  if(ev.type === 'bad_batch') {
-    const carried = DRUGS.filter(d => state.inventory[d] > 0);
+  if(chosen === 'bad_batch') {
+    const carried = DRUG_IDS.filter(d => state.inventory[d] > 0);
     if(carried.length > 0) {
-      const drug = pick(carried);
-      const lost = Math.ceil(state.inventory[drug] * (0.1 + Math.random()*0.3));
-      state.inventory[drug] = Math.max(0, state.inventory[drug] - lost);
-      state.eventMsg = { msg: ev.msg + ` ${lost} ${drug} eyðilögðust.`, cls:ev.cls };
-    } else { state.eventMsg = null; }
+      const d = pick(carried);
+      const lost = Math.ceil(state.inventory[d] * (0.15 + Math.random()*0.3));
+      state.inventory[d] = Math.max(0, state.inventory[d] - lost);
+      state.eventMsg = { msg:`💀 Slæm sending! ${lost} ${getDrug(d).name} eyðilögðust.`, cls:'bad' };
+    }
+    return false;
+  }
+  if(chosen === 'find') {
+    const d = pick(DRUG_IDS);
+    const free = getMaxSpace() - getSpacesUsed();
+    if(free <= 0) return false;
+    const qty = Math.min(free, randInt(2, 10));
+    state.inventory[d] += qty;
+    const msgs = [
+      `Þú fannst ${qty} ${getDrug(d).name} á jörðinni!`,
+      `Dealer missti ${qty} ${getDrug(d).name} á flótta frá löggunni!`,
+      `Nafnlaus ábending — ${qty} ${getDrug(d).name} fundust!`,
+    ];
+    state.eventMsg = { msg:'🎁 ' + pick(msgs), cls:'good' };
+    return false;
+  }
+  // PRD v3.5: New events
+  if(chosen === 'tollur') {
+    // Customs crackdown — imported drugs (Kók, Smakk) spike
+    ['kok','smakk'].forEach(d => { state.prices[d] = Math.round(state.prices[d] * 1.4); });
+    state.eventMsg = { msg:'🛃 Tollurinn herðir eftirlit! Innflutt efni (Kók, Smakk) hækkar um 40%!', cls:'bad' };
+    return false;
+  }
+  if(chosen === 'vinur_svikur') {
+    // Old friend betrays — stash in Rvk shrinks 20%
+    const stashed = DRUG_IDS.filter(d => state.stash[d] > 0);
+    if(stashed.length > 0) {
+      stashed.forEach(d => {
+        const lost = Math.ceil(state.stash[d] * 0.2);
+        state.stash[d] = Math.max(0, state.stash[d] - lost);
+      });
+      state.eventMsg = { msg:'🤝 Gamall vinur svíkur þig. Stash í Reykjavík minnkaði um 20%.', cls:'bad' };
+    } else {
+      state.eventMsg = { msg:'🤝 Gamall vinur reyndi að svíkja þig — en þú áttir ekkert í stash.', cls:'good' };
+    }
+    return false;
+  }
+  if(chosen === 'logmadur') {
+    // Lawyer reduces heat by 30
+    const reduced = Math.min(state.heat, 30);
+    state.heat = Math.max(0, state.heat - 30);
+    state.eventMsg = { msg:`⚖️ Lögmaður reddar þér. Heat lækkaði um ${reduced}!`, cls:'good' };
+    return false;
+  }
+  if(chosen === 'fjarfestir') {
+    // Investor offers to double cash loan — but debt increases 50%
+    if(state.debt > 0) {
+      const loanOffer = Math.round(state.debt * 0.5);
+      state.cash += loanOffer;
+      state.debt = Math.round(state.debt * 1.5);
+      state.eventMsg = { msg:`💼 Fjárfestir býðst að "hjálpa" — færð ${fmtISK(loanOffer)} en skuld hækkar um 50%!`, cls:'bad' };
+    } else {
+      state.eventMsg = { msg:'💼 Fjárfestir sér að þú ert skuldlaus. Enginn áhugi.', cls:'good' };
+    }
     return false;
   }
   state.eventMsg = null;
@@ -393,6 +562,10 @@ function render() {
   if(state.phase === 'travel') return renderTravel();
   if(state.phase === 'buy') return renderBuySell('buy');
   if(state.phase === 'sell') return renderBuySell('sell');
+  if(state.phase === 'loanshark') return renderLoanShark();
+  if(state.phase === 'bank') return renderBank();
+  if(state.phase === 'stash') return renderStash();
+  if(state.phase === 'blackmarket') return renderBlackMarket();
   renderMarket();
 }
 
@@ -400,177 +573,391 @@ function renderTitle() {
   $game.innerHTML = `
     <div class="title-screen">
       <div class="title-ascii">
- ╔══════════════════════╗
- ║  ICELANDIC DRUG WARS ║
- ╚══════════════════════╝</div>
-      <div class="title-sub">Dope Wars: Iceland Edition</div>
+ ╔═══════════════════════╗
+ ║   KRÓNAN  BRENNUR     ║
+ ║   Drug Wars: Ísland   ║
+ ╚═══════════════════════╝</div>
+      <div class="title-sub">30 dagar til að borga Bjarna Bróður</div>
       <div class="title-desc">
-        Þú ert eiturlyfjasali með ${TOTAL_DAYS} daga til að borga ${fmtISK(START_DEBT)} skuld.
+        Þú ert eiturlyfjasali með ${TOTAL_DAYS} daga til að borga ${fmtISK(START_DEBT)} skuld við Bjarna Bróður.
         Kauptu lágt, seldu hátt, ferðastu á milli bæja.
-        Passaðu þig á löggunni.
+        Passaðu þig á löggunni — og eldgosinu!
+        <br><span style="color:var(--red)">Vextir: 8% → 12% → 15%</span> (hækka eftir dag 10 og 20)
       </div>
       <div class="title-towns">
         ${LOCATIONS.map(l => `📍 ${l.name} — ${l.desc}`).join('<br>')}
       </div>
-      <button class="btn big" onclick="startGame()">▶ START GAME</button>
-      <div style="color:var(--dim);font-size:13px;">Based on Drug Wars (1984) by John E. Dell</div>
+      <div style="color:var(--dim);font-size:14px;margin-top:4px;">
+        ${DRUGS.map(d => `${d.emoji} ${d.name} (${d.eng})`).join(' │ ')}
+      </div>
+      ${hasSavedGame() ? `<button class="btn big" onclick="loadGame();state.phase='market';render()">▶ HALDA ÁFRAM</button>
+      <button class="btn big" onclick="deleteSave();startGame()" style="margin-top:4px;">🔄 NÝTT LEIK</button>` :
+      `<button class="btn big" onclick="startGame()">▶ BYRJA LEIK</button>`}
+      ${getHighScore() > 0 ? `<div style="color:var(--amber);font-size:14px;">🏆 Hæsta skor: ${fmtISK(getHighScore())}</div>` : ''}
+      <div style="color:var(--dim);font-size:12px;">Byggt á Drug Wars (1984) eftir John E. Dell</div>
     </div>
   `;
 }
 
-function startGame() {
-  newGame();
-  state.phase = 'market';
-  state.eventMsg = null;
-  render();
+function startGame() { newGame(); state.phase = 'market'; render(); }
+
+const DAILY_FLAVOR = [
+  'Dagur ${d}. Þú ert ennþá á lífi.',
+  'Dagur ${d}. Skuldin bíður.',
+  'Dagur ${d}. Krónan heldur áfram að falla.',
+  'Dagur ${d}. Bjarni minnist á þig.',
+  'Dagur ${d}. Einhver er að fylgjast með.',
+  'Dagur ${d}. Þetta leit betur út í símanum.',
+  'Dagur ${d}. Veðrið versnar.',
+  'Dagur ${d}. Allt er í lagi. Ekkert er í lagi.',
+  'Dagur ${d}. Haltu áfram.',
+  'Dagur ${d}. Ekki horfa til baka.',
+];
+
+function getDailyFlavor() {
+  const tmpl = DAILY_FLAVOR[state.day % DAILY_FLAVOR.length];
+  return tmpl.replace('${d}', state.day);
 }
 
 function renderHeader() {
   const loc = LOCATIONS.find(l => l.id === state.location);
+  const wep = getWeaponDef();
+  const hp = Math.round(state.heat);
+  const hc = hp > 60 ? 'var(--red)' : hp > 30 ? 'var(--amber)' : 'var(--dim)';
   return `
     <div class="header">
-      <div class="header-title">⚡ ICELANDIC DRUG WARS ⚡</div>
+      <div class="header-title">🔥 KRÓNAN BRENNUR 🔥</div>
       <div class="header-stats">
-        <span><span class="label">Day:</span> ${state.day}/${TOTAL_DAYS}</span>
-        <span><span class="label">Location:</span> ${loc.name}</span>
+        <span><span class="label">Dagur:</span> ${state.day}/${TOTAL_DAYS}</span>
+        <span><span class="label">📍</span> ${loc.name}</span>
         <span><span class="label">Cash:</span> <span class="val-cash">${fmtISK(state.cash)}</span></span>
-        <span><span class="label">Debt:</span> <span class="val-debt">${fmtISK(state.debt)}</span></span>
-        <span><span class="label">Space:</span> ${getSpacesUsed()}/${MAX_SPACE}</span>
-        <span></span>
+        <span><span class="label">Skuld:</span> <span class="val-debt">${fmtISK(state.debt)}</span></span>
+        <span><span class="label">Rými:</span> ${getSpacesUsed()}/${getMaxSpace()}</span>
+        <span><span class="label">🔫</span> ${wep.name}</span>
       </div>
-    </div>
-  `;
+      <div class="heat-bar">
+        <span class="heat-label" style="color:${hc}">🔥 ${hp}%</span>
+        <div class="bar-bg"><div class="bar-fill" style="width:${hp}%;background:${hc}"></div></div>
+      </div>
+      ${state.bank > 0 ? `<div style="font-size:13px;color:var(--dim);">🏦 Banki: ${fmtISK(state.bank)}</div>` : ''}
+    </div>`;
 }
 
 function renderMarket() {
   const loc = LOCATIONS.find(l => l.id === state.location);
   const flavor = pick(LOCATION_FLAVOR[state.location]);
-  const hasInventory = getSpacesUsed() > 0;
+  const hasInv = getSpacesUsed() > 0;
 
-  let eventHtml = '';
-  if(state.eventMsg) {
-    eventHtml = `<div class="event-box ${state.eventMsg.cls}">${state.eventMsg.msg}</div>`;
+  let ev = '';
+  if(state.eventMsg) ev = `<div class="event-box ${state.eventMsg.cls}">${state.eventMsg.msg}</div>`;
+
+  let inv = '';
+  const carried = DRUG_IDS.filter(d => state.inventory[d] > 0);
+  if(carried.length > 0) {
+    inv = `<div class="section-title">📦 Birgðir</div>
+      <div style="color:var(--dim);font-size:15px;">${carried.map(d => `${getDrug(d).emoji} ${getDrug(d).name}: ${state.inventory[d]}`).join(' │ ')}</div>`;
   }
 
-  let invHtml = '';
-  const carried = DRUGS.filter(d => state.inventory[d] > 0);
-  if(carried.length > 0) {
-    invHtml = `<div class="section-title">📦 Inventory</div>
-      <div style="color:var(--dim);font-size:15px;">${carried.map(d => `${d}: ${state.inventory[d]}`).join(' │ ')}</div>`;
+  let stashHtml = '';
+  if(state.location === 'reykjavik') {
+    const stashed = DRUG_IDS.filter(d => state.stash[d] > 0);
+    if(stashed.length > 0)
+      stashHtml = `<div style="color:var(--magenta);font-size:14px;margin:2px 0;">🏠 Stash: ${stashed.map(d => `${getDrug(d).name}: ${state.stash[d]}`).join(' │ ')}</div>`;
   }
 
   $game.innerHTML = `
     ${renderHeader()}
     <div class="content">
+      <div class="location-flavor">${getDailyFlavor()}</div>
       <div class="location-flavor">${flavor}</div>
-      ${eventHtml}
-      ${invHtml}
-      <div class="section-title">💊 Prices in ${loc.name}</div>
+      ${ev}${inv}${stashHtml}
+      ${snowstormActive ? '<div class="event-box bad">🌨️ Snjóstormur! Næsta ferð kostar 2 daga.</div>' : ''}
+      <div class="section-title">💊 Verð í ${loc.name}</div>
       <table class="price-table">
-        <tr><th>Drug</th><th style="text-align:right">Price</th><th style="text-align:right">Own</th></tr>
+        <tr><th>Efni</th><th style="text-align:right">Verð</th><th style="text-align:right">Á þér</th></tr>
         ${DRUGS.map(d => `
           <tr>
-            <td class="drug-name">${d}</td>
-            <td class="price">${fmtISK(state.prices[d])}</td>
-            <td class="inv">${state.inventory[d] || '-'}</td>
+            <td class="drug-name">${d.emoji} ${d.name}</td>
+            <td class="price">${fmtISK(state.prices[d.id])}</td>
+            <td class="inv">${state.inventory[d.id] || '-'}</td>
           </tr>
         `).join('')}
       </table>
     </div>
     <div class="actions">
       <div class="btn-row">
-        <button class="btn" onclick="startBuy()">💰 Buy</button>
-        <button class="btn sell" onclick="startSell()" ${!hasInventory?'disabled':''}>📤 Sell</button>
-        <button class="btn travel" onclick="startTravel()">✈️ Travel</button>
+        <button class="btn" onclick="startBuy()">💰 Kaupa</button>
+        <button class="btn sell" onclick="startSell()" ${!hasInv?'disabled':''}>📤 Selja</button>
+        <button class="btn travel" onclick="state.phase='travel';render()">✈️ Ferð</button>
       </div>
-    </div>
-  `;
+      <div class="btn-row" style="margin-top:6px;">
+        <button class="btn magenta" onclick="state.phase='loanshark';render()">🦈 Bjarni</button>
+        ${loc.hasBank?'<button class="btn" onclick="state.phase=\'bank\';render()">🏦 Banki</button>':''}
+        ${loc.hasStash?'<button class="btn magenta" onclick="state.phase=\'stash\';render()">🏠 Stash</button>':''}
+        <button class="btn" onclick="state.phase='blackmarket';render()">🔫 Svartam.</button>
+      </div>
+    </div>`;
 }
 
+// === LOAN SHARK ===
+function renderLoanShark() {
+  const rate = getInterestRate(state.day);
+  const ipd = Math.round(state.debt * rate);
+  const phase = state.day <= 10 ? 'Snemma (8%)' : state.day <= 20 ? 'Miðja (12%)' : 'Seint (15%)';
+  const threat = state.debt > 2000000 && state.day >= 15;
+  $game.innerHTML = `
+    ${renderHeader()}
+    <div class="content">
+      <div class="section-title">🦈 Bjarni Bróðir — Lánshákarl</div>
+      <div class="event-box" style="border-color:#333;">
+        "Sæll strákur... skuldin þín er <span style="color:var(--red)">${fmtISK(state.debt)}</span>."<br>
+        "Vextir: <span style="color:var(--amber)">${fmtISK(ipd)}</span> á dag (${Math.round(rate*100)}% — ${phase})."<br>
+        ${threat ? '"<span style="color:var(--red)">Hvar er peningurinn? Krónan er að falla og ég er að missa þolinmæðina!</span>"' : '"Borgaðu þegar þú getur... eða ekki."'}
+      </div>
+      <div class="section-title">Borga skuld</div>
+      <div class="qty-section">
+        <div class="qty-row">
+          <span style="color:var(--dim)">Upphæð:</span>
+          <input type="number" class="qty-input" id="pay-input" value="${Math.min(state.cash, state.debt)}" min="0" max="${Math.min(state.cash, state.debt)}" inputmode="numeric">
+        </div>
+        <div class="btn-row">
+          <button class="btn" onclick="document.getElementById('pay-input').value=${Math.min(state.cash,state.debt)}">ALLT</button>
+          <button class="btn" onclick="document.getElementById('pay-input').value=${Math.min(state.cash,Math.floor(state.debt/2))}">HÁLFT</button>
+        </div>
+        <button class="btn sell" onclick="payDebt()">💰 Borga</button>
+      </div>
+      <div class="section-title">Taka lán</div>
+      <div class="qty-section">
+        <div class="qty-row">
+          <span style="color:var(--dim)">Upphæð:</span>
+          <input type="number" class="qty-input" id="loan-input" value="100000" min="0" max="1000000" inputmode="numeric">
+        </div>
+        <button class="btn danger" onclick="takeLoan()">🦈 Taka lán</button>
+      </div>
+    </div>
+    <div class="actions"><div class="btn-row">
+      <button class="btn danger" onclick="state.phase='market';render()">← Til baka</button>
+    </div></div>`;
+}
+
+function payDebt() {
+  let amt = Math.min(parseInt(document.getElementById('pay-input').value)||0, state.cash, state.debt);
+  if(amt <= 0) return;
+  state.cash -= amt; state.debt -= amt;
+  state.phase = 'market';
+  state.eventMsg = { msg:`💰 Borgaðir ${fmtISK(amt)} til Bjarna. Eftirstöðvar: ${fmtISK(state.debt)}`, cls:'good' };
+  render();
+}
+
+function takeLoan() {
+  let amt = Math.max(0, Math.min(parseInt(document.getElementById('loan-input').value)||0, 1000000));
+  if(amt <= 0) return;
+  state.cash += amt; state.debt += amt;
+  state.phase = 'market';
+  state.eventMsg = { msg:`🦈 Tókst ${fmtISK(amt)} lán hjá Bjarna. Skuld: ${fmtISK(state.debt)}`, cls:'bad' };
+  render();
+}
+
+// === BANK ===
+function renderBank() {
+  $game.innerHTML = `
+    ${renderHeader()}
+    <div class="content">
+      <div class="section-title">🏦 Banki</div>
+      <div style="margin:8px 0;font-size:17px;">
+        Inneign: <span style="color:var(--amber)">${fmtISK(state.bank)}</span><br>
+        Cash: <span style="color:var(--green)">${fmtISK(state.cash)}</span>
+      </div>
+      <div style="color:var(--dim);font-size:14px;margin-bottom:8px;">Peningar í banka eru öruggir gegn ránum og Bjarna.</div>
+      <div class="section-title">Leggja inn</div>
+      <div class="qty-section">
+        <div class="qty-row">
+          <input type="number" class="qty-input" id="dep-input" value="${state.cash}" min="0" max="${state.cash}" inputmode="numeric">
+          <button class="btn" onclick="bankAction('dep')">⬆ Leggja inn</button>
+        </div>
+      </div>
+      <div class="section-title">Taka út</div>
+      <div class="qty-section">
+        <div class="qty-row">
+          <input type="number" class="qty-input" id="wd-input" value="${state.bank}" min="0" max="${state.bank}" inputmode="numeric">
+          <button class="btn sell" onclick="bankAction('wd')">⬇ Taka út</button>
+        </div>
+      </div>
+    </div>
+    <div class="actions"><div class="btn-row">
+      <button class="btn danger" onclick="state.phase='market';render()">← Til baka</button>
+    </div></div>`;
+}
+
+function bankAction(type) {
+  if(type === 'dep') {
+    let amt = Math.min(parseInt(document.getElementById('dep-input').value)||0, state.cash);
+    if(amt <= 0) return;
+    state.cash -= amt; state.bank += amt;
+    state.eventMsg = { msg:`🏦 Lagðir ${fmtISK(amt)} inn.`, cls:'good' };
+  } else {
+    let amt = Math.min(parseInt(document.getElementById('wd-input').value)||0, state.bank);
+    if(amt <= 0) return;
+    state.bank -= amt; state.cash += amt;
+    state.eventMsg = { msg:`🏦 Tókst ${fmtISK(amt)} út.`, cls:'good' };
+  }
+  state.phase = 'market'; render();
+}
+
+// === STASH ===
+function renderStash() {
+  const stashed = DRUG_IDS.filter(d => state.stash[d] > 0);
+  const carried = DRUG_IDS.filter(d => state.inventory[d] > 0);
+  $game.innerHTML = `
+    ${renderHeader()}
+    <div class="content">
+      <div class="section-title">🏠 Stash (Reykjavík)</div>
+      <div style="color:var(--dim);font-size:14px;margin-bottom:8px;">Geymsla sem tekur ekki pláss í trenchcoat.</div>
+      ${stashed.length > 0 ? `<div style="color:var(--magenta);font-size:15px;margin:4px 0;">Í stash: ${stashed.map(d => `${getDrug(d).name}: ${state.stash[d]}`).join(' │ ')}</div>` : '<div style="color:var(--dim);">Stash tómur.</div>'}
+      <div class="section-title">Geyma</div>
+      ${carried.length > 0 ? carried.map(d => `
+        <button class="town-btn" onclick="stashOp('store','${d}')">⬆ Geyma ${getDrug(d).name} <span class="town-desc">Á þér: ${state.inventory[d]}</span></button>
+      `).join('') : '<div style="color:var(--dim);">Ekkert á þér.</div>'}
+      <div class="section-title">Sækja</div>
+      ${stashed.length > 0 ? stashed.map(d => `
+        <button class="town-btn" onclick="stashOp('get','${d}')">⬇ Sækja ${getDrug(d).name} <span class="town-desc">Í stash: ${state.stash[d]}</span></button>
+      `).join('') : '<div style="color:var(--dim);">Ekkert í stash.</div>'}
+    </div>
+    <div class="actions"><div class="btn-row">
+      <button class="btn danger" onclick="state.phase='market';render()">← Til baka</button>
+    </div></div>`;
+}
+
+function stashOp(type, drug) {
+  if(type === 'store') {
+    state.stash[drug] += state.inventory[drug];
+    state.inventory[drug] = 0;
+  } else {
+    const free = getMaxSpace() - getSpacesUsed();
+    const amt = Math.min(state.stash[drug], free);
+    if(amt <= 0) { state.eventMsg = { msg:'Ekki pláss í trenchcoat!', cls:'bad' }; render(); return; }
+    state.inventory[drug] += amt;
+    state.stash[drug] -= amt;
+  }
+  render();
+}
+
+// === BLACK MARKET ===
+function renderBlackMarket() {
+  const cw = getWeaponDef();
+  const cc = COATS[state.coatLevel];
+  const nc = COATS[state.coatLevel + 1];
+  $game.innerHTML = `
+    ${renderHeader()}
+    <div class="content">
+      <div class="section-title">🔫 Svartamarkaðurinn</div>
+      <div style="color:var(--dim);font-size:14px;margin-bottom:8px;">Vopn og búnaður. Engir spurningar.</div>
+      <div class="section-title">Vopn</div>
+      <div style="font-size:15px;color:var(--dim);margin-bottom:4px;">Núverandi: ${cw.name} (${Math.round(cw.defense*100)}% vörn)</div>
+      ${WEAPONS.filter(w => w.id !== state.weapon && w.price > 0).map(w => `
+        <button class="town-btn" onclick="buyWeapon('${w.id}')" ${state.cash < w.price ? 'style="opacity:0.4"' : ''}>
+          🔫 ${w.name} — <span style="color:var(--amber)">${fmtISK(w.price)}</span>
+          <span class="town-desc">${Math.round(w.defense*100)}% vörn</span>
+        </button>`).join('')}
+      <div class="section-title">Trenchcoat</div>
+      <div style="font-size:15px;color:var(--dim);margin-bottom:4px;">Núverandi: ${cc.name} (${cc.space} rými)</div>
+      ${nc ? `<button class="town-btn" onclick="buyCoat()" ${state.cash < nc.price ? 'style="opacity:0.4"' : ''}>
+        🧥 ${nc.name} — <span style="color:var(--amber)">${fmtISK(nc.price)}</span>
+        <span class="town-desc">${nc.space} rými</span></button>` : '<div style="color:var(--dim);">Max level!</div>'}
+    </div>
+    <div class="actions"><div class="btn-row">
+      <button class="btn danger" onclick="state.phase='market';render()">← Til baka</button>
+    </div></div>`;
+}
+
+function buyWeapon(id) {
+  const w = WEAPONS.find(x => x.id === id);
+  if(!w || state.cash < w.price) return;
+  state.cash -= w.price; state.weapon = w.id; addHeat(5);
+  state.eventMsg = { msg:`🔫 Keyptir ${w.name}! ${Math.round(w.defense*100)}% vörn.`, cls:'good' };
+  state.phase = 'market'; render();
+}
+
+function buyCoat() {
+  const nc = COATS[state.coatLevel + 1];
+  if(!nc || state.cash < nc.price) return;
+  state.cash -= nc.price; state.coatLevel++;
+  state.eventMsg = { msg:`🧥 Uppfærðir í ${nc.name}! ${nc.space} rými.`, cls:'good' };
+  state.phase = 'market'; render();
+}
+
+// === BUY / SELL ===
 function renderBuySell(mode) {
   const isBuy = mode === 'buy';
-  const title = isBuy ? '💰 BUY DRUGS' : '📤 SELL DRUGS';
-  const freeSpace = MAX_SPACE - getSpacesUsed();
+  const title = isBuy ? '💰 KAUPA' : '📤 SELJA';
+  const freeSpace = getMaxSpace() - getSpacesUsed();
 
-  const drugList = DRUGS.filter(d => {
+  const drugList = DRUG_IDS.filter(d => {
     if(isBuy) return state.prices[d] <= state.cash;
     return state.inventory[d] > 0;
   });
 
   if(state.selectedDrug) {
     const d = state.selectedDrug;
+    const dr = getDrug(d);
     const price = state.prices[d];
-    let maxQty;
-    if(isBuy) {
-      maxQty = Math.min(freeSpace, Math.floor(state.cash / price));
-    } else {
-      maxQty = state.inventory[d];
-    }
+    const maxQty = isBuy ? Math.min(freeSpace, Math.floor(state.cash / price)) : state.inventory[d];
 
     $game.innerHTML = `
       ${renderHeader()}
       <div class="content">
         <div class="section-title">${title}</div>
         <div style="margin:8px 0;font-size:18px;">
-          <span style="color:var(--cyan)">${d}</span> @ <span style="color:var(--amber)">${fmtISK(price)}</span> each
+          ${dr.emoji} <span style="color:var(--cyan)">${dr.name}</span> @ <span style="color:var(--amber)">${fmtISK(price)}</span>
         </div>
         <div class="qty-section">
           <div class="qty-row">
-            <span style="color:var(--dim)">Qty:</span>
+            <span style="color:var(--dim)">Magn:</span>
             <input type="number" class="qty-input" id="qty-input" value="${maxQty}" min="1" max="${maxQty}" inputmode="numeric">
-            <span class="qty-info">/ ${maxQty} max</span>
+            <span class="qty-info">/ ${maxQty}</span>
           </div>
           <div style="display:flex;gap:6px;flex-wrap:wrap;">
-            <button class="btn" onclick="setQty(${maxQty})" style="flex:1;min-width:60px;">MAX</button>
-            <button class="btn" onclick="setQty(Math.floor(${maxQty}/2))" style="flex:1;min-width:60px;">HALF</button>
-            <button class="btn" onclick="setQty(Math.floor(${maxQty}/4))" style="flex:1;min-width:60px;">¼</button>
-            <button class="btn" onclick="setQty(1)" style="flex:1;min-width:60px;">1</button>
+            <button class="btn" onclick="setQty(${maxQty})" style="flex:1;min-width:55px;">MAX</button>
+            <button class="btn" onclick="setQty(${Math.floor(maxQty/2)})" style="flex:1;min-width:55px;">HÁLFT</button>
+            <button class="btn" onclick="setQty(${Math.floor(maxQty/4)})" style="flex:1;min-width:55px;">¼</button>
+            <button class="btn" onclick="setQty(1)" style="flex:1;min-width:55px;">1</button>
           </div>
-          <div id="qty-total" style="color:var(--amber);font-size:16px;">Total: ${fmtISK(maxQty*price)}</div>
+          <div id="qty-total" style="color:var(--amber);font-size:16px;">Samtals: ${fmtISK(maxQty*price)}</div>
         </div>
       </div>
-      <div class="actions">
-        <div class="btn-row">
-          <button class="btn ${isBuy?'':'sell'}" onclick="confirmBuySell('${mode}','${d}')">${isBuy?'💰 BUY':'📤 SELL'}</button>
-          <button class="btn danger" onclick="state.selectedDrug=null;render()">✖ Cancel</button>
-        </div>
-      </div>
-    `;
-    const qInput = document.getElementById('qty-input');
+      <div class="actions"><div class="btn-row">
+        <button class="btn ${isBuy?'':'sell'}" onclick="confirmBuySell('${mode}','${d}')">${isBuy?'💰 KAUPA':'📤 SELJA'}</button>
+        <button class="btn danger" onclick="state.selectedDrug=null;render()">✖ Hætta við</button>
+      </div></div>`;
+    const qi = document.getElementById('qty-input');
     const tEl = document.getElementById('qty-total');
-    qInput.addEventListener('input', () => {
-      let v = parseInt(qInput.value)||0;
-      v = Math.max(0, Math.min(maxQty, v));
-      tEl.textContent = 'Total: ' + fmtISK(v * price);
+    qi.addEventListener('input', () => {
+      let v = Math.max(0, Math.min(maxQty, parseInt(qi.value)||0));
+      tEl.textContent = 'Samtals: ' + fmtISK(v * price);
     });
-    qInput.focus();
-    qInput.select();
+    qi.focus(); qi.select();
     return;
   }
 
-  // Drug selection list
   $game.innerHTML = `
     ${renderHeader()}
     <div class="content">
       <div class="section-title">${title}</div>
-      ${isBuy ? `<div class="qty-info">Cash: ${fmtISK(state.cash)} │ Free space: ${freeSpace}</div>` : ''}
-      ${drugList.length === 0 ? `<div style="color:var(--dim);margin:12px 0;">${isBuy?'Ekki nóg cash til að kaupa neitt.':'Ekkert til sölu.'}</div>` : ''}
+      ${isBuy ? `<div class="qty-info">Cash: ${fmtISK(state.cash)} │ Rými: ${freeSpace}</div>` : ''}
+      ${drugList.length === 0 ? `<div style="color:var(--dim);margin:12px 0;">${isBuy?'Ekki nóg cash.':'Ekkert til sölu.'}</div>` : ''}
       ${drugList.map(d => {
+        const dr = getDrug(d);
         const price = state.prices[d];
-        const maxQ = isBuy ? Math.min(freeSpace, Math.floor(state.cash/price)) : state.inventory[d];
-        return `
-          <button class="town-btn" onclick="state.selectedDrug='${d}';render()">
-            ${d} — <span style="color:var(--amber)">${fmtISK(price)}</span>
-            <span class="town-desc">${isBuy ? `Max: ${maxQ}` : `Own: ${state.inventory[d]}`}</span>
-          </button>`;
+        const mq = isBuy ? Math.min(freeSpace, Math.floor(state.cash/price)) : state.inventory[d];
+        return `<button class="town-btn" onclick="state.selectedDrug='${d}';render()">
+          ${dr.emoji} ${dr.name} — <span style="color:var(--amber)">${fmtISK(price)}</span>
+          <span class="town-desc">${isBuy ? `Max: ${mq}` : `Á þér: ${state.inventory[d]}`}</span>
+        </button>`;
       }).join('')}
     </div>
-    <div class="actions">
-      <div class="btn-row">
-        <button class="btn danger" onclick="state.selectedDrug=null;state.phase='market';render()">← Back</button>
-      </div>
-    </div>
-  `;
+    <div class="actions"><div class="btn-row">
+      <button class="btn danger" onclick="state.selectedDrug=null;state.phase='market';render()">← Til baka</button>
+    </div></div>`;
 }
 
 function setQty(n) {
@@ -581,22 +968,27 @@ function setQty(n) {
 }
 
 function confirmBuySell(mode, drug) {
-  const el = document.getElementById('qty-input');
-  let qty = parseInt(el.value) || 0;
+  let qty = parseInt(document.getElementById('qty-input').value) || 0;
   if(qty <= 0) return;
-
   const price = state.prices[drug];
   if(mode === 'buy') {
-    const maxQty = Math.min(MAX_SPACE - getSpacesUsed(), Math.floor(state.cash / price));
-    qty = Math.min(qty, maxQty);
+    qty = Math.min(qty, getMaxSpace() - getSpacesUsed(), Math.floor(state.cash / price));
     if(qty <= 0) return;
-    state.cash -= qty * price;
+    const total = qty * price;
+    state.cash -= total;
     state.inventory[drug] += qty;
+    let heatGain = Math.ceil(total / 50000);
+    if(total > 200000) heatGain *= 2; // PRD v3.5: double heat for large transactions
+    addHeat(heatGain);
   } else {
     qty = Math.min(qty, state.inventory[drug]);
     if(qty <= 0) return;
-    state.cash += qty * price;
+    const total = qty * price;
+    state.cash += total;
     state.inventory[drug] -= qty;
+    let heatGain = Math.ceil(total / 50000);
+    if(total > 200000) heatGain *= 2; // PRD v3.5: double heat for large transactions
+    addHeat(heatGain);
   }
   state.selectedDrug = null;
   state.phase = 'market';
@@ -606,98 +998,107 @@ function confirmBuySell(mode, drug) {
 function startBuy() { state.phase = 'buy'; state.selectedDrug = null; render(); }
 function startSell() { state.phase = 'sell'; state.selectedDrug = null; render(); }
 
-function startTravel() { state.phase = 'travel'; render(); }
-
+// === TRAVEL ===
 function renderTravel() {
   const others = LOCATIONS.filter(l => l.id !== state.location);
+  const dayCost = snowstormActive ? 2 : 1;
   $game.innerHTML = `
     ${renderHeader()}
     <div class="content">
-      <div class="section-title">✈️ Travel — Day ${state.day}/${TOTAL_DAYS}</div>
-      <div class="qty-info" style="margin:4px 0 8px;">Choose destination (costs 1 day):</div>
+      <div class="section-title">✈️ Ferðast — Dagur ${state.day}/${TOTAL_DAYS}</div>
+      <div class="qty-info" style="margin:4px 0 8px;">Veldu áfangastað (kostar ${dayCost} ${dayCost>1?'daga':'dag'}):</div>
+      ${snowstormActive ? '<div class="event-box bad">🌨️ Snjóstormur! Ferðir kosta 2 daga.</div>' : ''}
       ${others.map(l => `
         <button class="town-btn" onclick="travelTo('${l.id}')">
           📍 ${l.name}
           <span class="town-desc">${l.desc}</span>
-        </button>
-      `).join('')}
+        </button>`).join('')}
       <button class="town-btn" onclick="travelTo('${state.location}')" style="border-color:#333;color:var(--dim);">
-        🔄 Stay in ${LOCATIONS.find(l=>l.id===state.location).name}
-        <span class="town-desc">Still costs 1 day — new prices</span>
+        🔄 Vera í ${LOCATIONS.find(l=>l.id===state.location).name}
+        <span class="town-desc">Kostar ${dayCost} dag — ný verð</span>
       </button>
     </div>
-    <div class="actions">
-      <div class="btn-row">
-        <button class="btn danger" onclick="state.phase='market';render()">← Back</button>
-      </div>
-    </div>
-  `;
+    <div class="actions"><div class="btn-row">
+      <button class="btn danger" onclick="state.phase='market';render()">← Til baka</button>
+    </div></div>`;
 }
 
 function travelTo(locId) {
-  state.day++;
+  const dayCost = snowstormActive ? 2 : 1;
+  state.day += dayCost;
   state.location = locId;
+  snowstormActive = false;
   generatePrices();
 
+  // Interest for each day traveled
+  let totalInterest = 0;
+  for(let i = 0; i < dayCost; i++) totalInterest += applyInterest();
+  decayHeat();
+
   if(state.day > TOTAL_DAYS) {
-    state.phase = 'end';
-    state.endReason = 'time';
-    render();
-    return;
+    state.phase = 'end'; state.endReason = 'time'; render(); return;
   }
 
-  // Roll for event
-  const ended = processEvent();
+  const ended = rollAndProcessEvent();
   if(ended) { render(); return; }
 
-  state.phase = 'market';
-  render();
+  if(totalInterest > 0 && !state.eventMsg) {
+    state.eventMsg = { msg:`📈 Vextir: +${fmtISK(totalInterest)} á skuld`, cls:'bad' };
+  } else if(totalInterest > 0 && state.eventMsg) {
+    state.eventMsg.msg += `<br>📈 Vextir: +${fmtISK(totalInterest)}`;
+  }
 
-  // Scroll to top
-  const content = document.querySelector('.content');
-  if(content) content.scrollTop = 0;
+  state.phase = 'market';
+  saveGame(); // auto-save á hverjum degi
+  render();
+  const c = document.querySelector('.content');
+  if(c) c.scrollTop = 0;
 }
 
+// === END SCREEN ===
 function renderEnd() {
   let title, titleColor, msg, scoreText;
 
+  deleteSave(); // clear save on game end
   if(state.endReason === 'busted') {
-    title = '🚨 BUSTED!';
+    title = '🚨 HANDTEKINN!';
     titleColor = 'var(--red)';
     msg = 'Lögreglan náði þér. Leikur búinn.';
-    scoreText = 'Final Score: 0 ISK';
+    scoreText = 'Skor: 0 kr';
   } else {
-    const profit = state.cash - state.debt;
-    // Sell remaining inventory at half price for final score
     let invValue = 0;
-    DRUGS.forEach(d => {
+    DRUG_IDS.forEach(d => {
+      const bp = BASE_PRICES[d];
       if(state.inventory[d] > 0) {
-        const ranges = PRICES[state.location][d];
-        const avgPrice = Math.round((ranges[0]+ranges[1])/2 * 0.5);
-        invValue += state.inventory[d] * avgPrice;
+        invValue += state.inventory[d] * Math.round(bp.base * 0.5);
+      }
+      if(state.stash[d] > 0) {
+        invValue += state.stash[d] * Math.round(bp.base * 0.4);
       }
     });
-    const totalCash = state.cash + invValue;
-    const finalProfit = totalCash - state.debt;
+    const total = state.cash + state.bank + invValue;
+    const profit = total - state.debt;
 
-    if(finalProfit > 0) {
-      title = '💰 YOU WIN!';
+    saveHighScore(profit);
+    if(profit > 0) {
+      title = '💰 ÞÚ VANNST!';
       titleColor = 'var(--green)';
-      msg = `Þú borgaðir skuldina og græddir! Ekki slæmt fyrir ${TOTAL_DAYS} daga.`;
+      msg = `Þú borgaðir Bjarna Bróður og græddir! Ekki slæmt.`;
     } else {
       title = '💀 GAME OVER';
       titleColor = 'var(--red)';
-      msg = 'Þú borgaðir ekki skuldina. Lánshaigurinn sendi menn...';
+      msg = 'Þú borgaðir ekki skuldina. Bjarni Bróðir sendi menn...';
     }
     scoreText = `
       Cash: ${fmtISK(state.cash)}<br>
-      ${invValue > 0 ? `Inventory (sold at half): ${fmtISK(invValue)}<br>` : ''}
-      ${invValue > 0 ? `Total: ${fmtISK(totalCash)}<br>` : ''}
-      Debt: -${fmtISK(state.debt)}<br>
-      <span style="color:${finalProfit>=0?'var(--green)':'var(--red)'};">
-        ${finalProfit>=0?'Profit':'Loss'}: ${fmtISK(Math.abs(finalProfit))}
-      </span>
-    `;
+      ${state.bank > 0 ? `Banki: ${fmtISK(state.bank)}<br>` : ''}
+      ${invValue > 0 ? `Birgðir + stash (selt á hálfu): ${fmtISK(invValue)}<br>` : ''}
+      Samtals: ${fmtISK(total)}<br>
+      Skuld: -${fmtISK(state.debt)}<br>
+      Vextir greiddir: ${fmtISK(state.interestPaid)}<br>
+      <span style="color:${profit>=0?'var(--green)':'var(--red)'};">
+        ${profit>=0?'Hagnaður':'Tap'}: ${fmtISK(Math.abs(profit))}
+      </span>`;
   }
 
   $game.innerHTML = `
@@ -705,10 +1106,52 @@ function renderEnd() {
       <div class="end-title" style="color:${titleColor}">${title}</div>
       <div style="font-size:18px;color:var(--dim);max-width:320px;line-height:1.4;">${msg}</div>
       <div class="end-score" style="line-height:1.8;font-size:18px;">${scoreText}</div>
-      <button class="btn big" onclick="startGame()">🔄 PLAY AGAIN</button>
-      <div style="color:var(--dim);font-size:13px;margin-top:8px;">Icelandic Drug Wars — 2026</div>
-    </div>
-  `;
+      <button class="btn big" onclick="startGame()">🔄 SPILA AFTUR</button>
+      ${getHighScore() > 0 ? `<div style="color:var(--amber);font-size:14px;">🏆 Hæsta skor: ${fmtISK(getHighScore())}</div>` : ''}
+      <div style="color:var(--dim);font-size:12px;margin-top:8px;">Krónan Brennur v3.5 — 2026</div>
+    </div>`;
+}
+
+// === SAVE / LOAD (localStorage) ===
+function saveGame() {
+  try {
+    localStorage.setItem('kronan_save', JSON.stringify(state));
+  } catch(e) {}
+}
+
+function hasSavedGame() {
+  try {
+    const saved = localStorage.getItem('kronan_save');
+    if(!saved) return false;
+    const s = JSON.parse(saved);
+    return !!(s && s.day && !s.gameOver);
+  } catch(e) { return false; }
+}
+
+function loadGame() {
+  try {
+    const saved = localStorage.getItem('kronan_save');
+    if(!saved) return false;
+    const s = JSON.parse(saved);
+    if(!s || !s.day || s.gameOver) return false;
+    state = s;
+    return true;
+  } catch(e) { return false; }
+}
+
+function deleteSave() {
+  try { localStorage.removeItem('kronan_save'); } catch(e) {}
+}
+
+function saveHighScore(score) {
+  try {
+    const prev = parseInt(localStorage.getItem('kronan_highscore')) || 0;
+    if(score > prev) localStorage.setItem('kronan_highscore', score);
+  } catch(e) {}
+}
+
+function getHighScore() {
+  try { return parseInt(localStorage.getItem('kronan_highscore')) || 0; } catch(e) { return 0; }
 }
 
 // === INIT ===
